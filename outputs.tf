@@ -1,4 +1,5 @@
 output "password" {
+  sensitive   = true
   description = "RDS master password"
   value       = "${var.password == "" ? local.password : var.password}"
 }
