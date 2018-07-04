@@ -30,7 +30,7 @@ resource "aws_db_instance" "parameterized" {
   db_subnet_group_name            = "${aws_db_subnet_group.default.name}"
   identifier                      = "${lower(var.name)}"
   parameter_group_name            = "${var.parameter_group_name}"
-  skip_final_snapshot             = false
+  skip_final_snapshot             = true
   allocated_storage               = "${var.disk_size}"
   storage_type                    = "gp2"
   multi_az                        = "${var.multi_az}"
