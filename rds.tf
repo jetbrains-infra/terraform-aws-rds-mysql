@@ -2,7 +2,7 @@ resource "aws_db_instance" "default" {
   count                           = "${ var.parameter_group_name == "" ? 1 : 0}"
   instance_class                  = "${var.instance_type}"
   engine                          = "mysql"
-  engine_version                  = "${var.version}"
+  engine_version                  = "${var.engine_version}"
   vpc_security_group_ids          = ["${aws_security_group.default.id}"]
   db_subnet_group_name            = "${aws_db_subnet_group.default.name}"
   identifier                      = "${lower(var.name)}"
@@ -25,7 +25,7 @@ resource "aws_db_instance" "parameterized" {
   count                           = "${ var.parameter_group_name == "" ? 0 : 1}"
   instance_class                  = "${var.instance_type}"
   engine                          = "mysql"
-  engine_version                  = "${var.version}"
+  engine_version                  = "${var.engine_version}"
   vpc_security_group_ids          = ["${aws_security_group.default.id}"]
   db_subnet_group_name            = "${aws_db_subnet_group.default.name}"
   identifier                      = "${lower(var.name)}"

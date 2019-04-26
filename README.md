@@ -17,7 +17,7 @@ Terraform module to run RDS MySQL instance.
 * `backup_retention_period` - The days to retain backups for (Default is `3`)
 * `backup_window` - The daily time range (in UTC) during which automated backups are created if they are enabled (Default `05:00-07:00`)
 * `instance_type` - The instance type of the RDS instance (Default is `db.t2.small`)
-* `version` - MySQL version. Default is 5.7 (Default is `5.7`)
+* `engine_version` - MySQL version. Default is 8.0 (Default is `8.0`)
 * `apply_immediately` - Specifies whether any database modifications are applied immediately, or during the next maintenance window (Default is `true`)
 * `parameter_group_name` - Name of the DB parameter group to associate (Optional)
 

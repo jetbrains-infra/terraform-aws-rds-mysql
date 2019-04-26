@@ -66,13 +66,13 @@ locals {
   vpc_id = "${data.aws_subnet.default.vpc_id}"
 }
 
-variable "version" {
-  description = "MySQL version. Default is 5.7"
-  default     = "5.7"
+variable "engine_version" {
+  description = "MySQL version. Default is 8.0"
+  default     = "8.0"
 }
 
 locals {
-  family = "mysql${var.version}"
+  family = "mysql${var.engine_version}"
 }
 
 variable "apply_immediately" {
