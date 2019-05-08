@@ -4,6 +4,7 @@ Terraform module to run RDS MySQL instance.
 
 ### Params 
 * `name` - A unique name of RDS instance
+* `project` - A project tag
 * `db_subnets`- A list of VPC subnet IDs
 * `trusted_cidr_blocks` - A list of trusted external IP. You may specify office IPs f.e. Of course, RDS should be public accessible.
 
@@ -27,8 +28,9 @@ Default RDS instances (`db.t2.small` type):
 ```
 module "example_rds" {
   source              = "github.com/jetbrains-infra/terraform-aws-rds-mysql"
+  project             = "FooBar"
   name                = "example"
-  db_subnets         = ["${aws_subnet.private_subnet_1.id}","${aws_subnet.private_subnet_2.id}"]
+  db_subnets          = ["${aws_subnet.private_subnet_1.id}","${aws_subnet.private_subnet_2.id}"]
   trusted_cidr_blocks = [
     "${aws_subnet.public_subnet_1.cidr_block}",
     "${aws_subnet.public_subnet_2.cidr_block}"

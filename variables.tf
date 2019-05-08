@@ -2,6 +2,10 @@ variable "name" {
   description = "A unique name of RDS instance"
 }
 
+variable "project" {
+  description = "Project tag"
+}
+
 variable "disk_size" {
   description = "The allocated storage in gibibytes."
   default     = "20"
@@ -83,4 +87,8 @@ variable "apply_immediately" {
 variable "parameter_group_name" {
   description = "Name of the DB parameter group to associate."
   default     = ""
+}
+
+locals {
+  project = "${var.project}"
 }

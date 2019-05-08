@@ -19,6 +19,10 @@ resource "aws_db_instance" "default" {
   storage_encrypted               = true
   apply_immediately               = "${var.apply_immediately}"
   enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
+
+  tags {
+    Project = "${local.project}"
+  }
 }
 
 resource "aws_db_instance" "parameterized" {
@@ -43,4 +47,8 @@ resource "aws_db_instance" "parameterized" {
   storage_encrypted               = true
   apply_immediately               = "${var.apply_immediately}"
   enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
+
+  tags {
+    Project = "${local.project}"
+  }
 }

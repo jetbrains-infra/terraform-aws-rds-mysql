@@ -9,4 +9,7 @@ resource "aws_security_group" "default" {
     cidr_blocks = ["${var.trusted_cidr_blocks}"]
   }
 
+  tags {
+    Project = "${local.project}"
+  }
 }
