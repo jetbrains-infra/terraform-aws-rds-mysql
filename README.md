@@ -8,7 +8,7 @@ Terraform module to run RDS MySQL instance.
 * `trusted_cidr_blocks` - A list of trusted external IP. You may specify office IPs f.e. Of course, RDS should be public accessible.
 
 ### Optional params with default values
-* `disk_size` - The allocated storage in gibibytes. (Default is `20"`)
+* `disk_size` - The allocated storage in gibibytes. (Default is `20`)
 * `password` - Password for the master DB user. Leave empty to generate (Optional)
 * `username` - Username for the master DB user. Leave empty to generate (Optional)
 * `database` - The name of the database to create when the DB instance is created (Optional)

@@ -1,5 +1,5 @@
 resource "aws_db_instance" "default" {
-  count                           = "${ var.parameter_group_name == "" ? 1 : 0}"
+  count                           = "${var.parameter_group_name == "" ? 1 : 0}"
   instance_class                  = "${var.instance_type}"
   engine                          = "mysql"
   engine_version                  = "${var.engine_version}"
@@ -22,7 +22,7 @@ resource "aws_db_instance" "default" {
 }
 
 resource "aws_db_instance" "parameterized" {
-  count                           = "${ var.parameter_group_name == "" ? 0 : 1}"
+  count                           = "${var.parameter_group_name == "" ? 0 : 1}"
   instance_class                  = "${var.instance_type}"
   engine                          = "mysql"
   engine_version                  = "${var.engine_version}"
