@@ -12,9 +12,3 @@ resource "random_pet" "username" {
 resource "random_pet" "db_name" {
   length    = 1
 }
-
-locals {
-  username = "${random_pet.username.id}"
-  password = "${random_string.password.result}"
-  database = "${random_pet.db_name.id}"
-}

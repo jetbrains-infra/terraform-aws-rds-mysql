@@ -1,12 +1,12 @@
 resource "aws_security_group" "default" {
-  name   = "RDS"
+  name   = "${local.name}"
   vpc_id = "${local.vpc_id}"
 
   ingress {
     from_port   = 3306
     protocol    = "TCP"
     to_port     = 3306
-    cidr_blocks = ["${var.trusted_cidr_blocks}"]
+    cidr_blocks = ["${local.trusted_cidr_blocks}"]
   }
 
   tags {
