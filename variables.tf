@@ -93,6 +93,7 @@ locals {
   project                 = "${var.project}"
   name                    = "${var.name}"
   id                      = "${lower(replace(var.name, " ", "-"))}"
+  subnet_group_name       = "${lower(replace(var.name, " ", "-"))}"
   username                = "${var.username == "" ? random_pet.username.id : var.username}"
   password                = "${var.password == "" ? random_string.password.result : var.password}"
   database                = "${var.database == "" ? random_pet.db_name.id : var.database}"
