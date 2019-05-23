@@ -46,6 +46,26 @@ variable "backup_retention_period" {
   default     = 3
 }
 
+variable "enable_audit_log" {
+  description = "Enable audit log."
+  default     = false
+}
+
+variable "enable_error_log" {
+  description = "Enable error log."
+  default     = true
+}
+
+variable "enable_general_log" {
+  description = "Enable general log."
+  default     = true
+}
+
+variable "enable_slowquery_log" {
+  description = "Enable slowquery log."
+  default     = true
+}
+
 variable "backup_window" {
   description = "The daily time range (in UTC) during which automated backups are created if they are enabled."
   default     = "05:00-07:00"
@@ -72,7 +92,7 @@ locals {
 
 variable "engine_version" {
   description = "MySQL version. Default is 8.0"
-  default     = "8.0"
+  default     = 8.0
 }
 
 locals {
@@ -113,4 +133,10 @@ locals {
   address                 = "${local.parameter_group_name == "" ? join("", aws_db_instance.default.*.address) : join("", aws_db_instance.parameterized.*.address)}"
   hosted_zone_id          = "${var.parameter_group_name == "" ? join("", aws_db_instance.default.*.hosted_zone_id) : join("", aws_db_instance.parameterized.*.hosted_zone_id)}"
   rds_id                  = "${var.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)}"
+  logs_set                = ["${compact(list(
+    "${var.enable_audit_log ? "audit" : "" }",
+    "${var.enable_error_log ? "error" : "" }",
+    "${var.enable_general_log ? "general" : "" }",
+    "${var.enable_slowquery_log ? "slowquery" : "" }"
+  ))}"]
 }

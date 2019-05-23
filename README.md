@@ -21,6 +21,10 @@ Terraform module to run RDS MySQL instance.
 * `engine_version` - MySQL version. Default is 8.0 (Default is `8.0`)
 * `apply_immediately` - Specifies whether any database modifications are applied immediately, or during the next maintenance window (Default is `true`)
 * `parameter_group_name` - Name of the DB parameter group to associate (Optional)
+* `enable_audit_log` - Enable audit log (Default is `false`)
+* `enable_error_log` - Enable error log (Default is `true`)
+* `enable_general_log` - Enable general log (Default `true`)
+* `enable_slowquery_log` - Enable slowquery log (Default `true`)
 
 ## Usage
 
