@@ -10,5 +10,5 @@ resource "random_pet" "username" {
 }
 
 resource "random_pet" "db_name" {
-  length    = 1
+  length = 1
 }

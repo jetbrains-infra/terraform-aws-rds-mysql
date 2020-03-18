@@ -134,4 +134,34 @@ locals {
   hosted_zone_id          = var.parameter_group_name == "" ? join("", aws_db_instance.default.*.hosted_zone_id) : join("", aws_db_instance.parameterized.*.hosted_zone_id)
   rds_id                  = var.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)
   logs_set                = compact(list(var.enable_audit_log ? "audit" : "",var.enable_error_log ? "error" : "",var.enable_general_log ? "general" : "",var.enable_slowquery_log ? "slowquery" : ""))
+  project                 = var.project
+  name                    = var.name
+  id                      = lower(replace(var.name, " ", "-"))
+  subnet_group_name       = lower(replace(var.name, " ", "-"))
+  username                = var.username == "" ? random_pet.username.id : var.username
+  password                = var.password == "" ? random_string.password.result : var.password
+  database                = var.database == "" ? random_pet.db_name.id : var.database
+  parameter_group_name    = var.parameter_group_name
+  rds_with_param_group    = local.parameter_group_name == "" ? 0 : 1
+  rds_without_param_group = local.parameter_group_name == "" ? 1 : 0
+  instance_type           = var.instance_type
+  engine_version          = var.engine_version
+  disk_size               = var.disk_size
+  multi_az                = var.multi_az
+  backup_window           = var.backup_window
+  backup_retention_period = var.backup_retention_period
+  publicly_accessible     = var.publicly_accessible
+  apply_immediately       = var.apply_immediately
+  trusted_cidr_blocks     = var.trusted_cidr_blocks
+  db_subnets              = var.db_subnets
+  address                 = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.address) : join("", aws_db_instance.parameterized.*.address)
+  hosted_zone_id          = var.parameter_group_name == "" ? join("", aws_db_instance.default.*.hosted_zone_id) : join("", aws_db_instance.parameterized.*.hosted_zone_id)
+  rds_id                  = var.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)
+  logs_set                = compact([
+                              var.enable_audit_log ? "audit" : "",
+                              var.enable_error_log ? "error" : "",
+                              var.enable_general_log ? "general" : "",
+                              var.enable_slowquery_log ? "slowquery" : "",
+                            ])
+
 }
