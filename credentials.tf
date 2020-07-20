@@ -1,4 +1,4 @@
-resource "random_string" "password" {
+resource "random_password" "password" {
   length           = 14
   special          = true
   override_special = "!#$%&'()*+,-.:;<=>?_`{|}~"

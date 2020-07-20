@@ -19,10 +19,7 @@ resource "aws_db_instance" "default" {
   storage_encrypted               = true
   apply_immediately               = local.apply_immediately
   enabled_cloudwatch_logs_exports = local.logs_set
-
-  tags = {
-    Project = local.project
-  }
+  tags                            = local.tags
 }
 
 resource "aws_db_instance" "parameterized" {
@@ -47,8 +44,5 @@ resource "aws_db_instance" "parameterized" {
   storage_encrypted               = true
   apply_immediately               = local.apply_immediately
   enabled_cloudwatch_logs_exports = local.logs_set
-
-  tags = {
-    Project = local.project
-  }
+  tags                            = local.tags
 }
