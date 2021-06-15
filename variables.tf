@@ -85,6 +85,10 @@ variable "parameter_prefix" {
   description = "Prefix for module params to store in SSM Parameter Store."
   default     = ""
 }
+variable "deletion_protection" {
+  description = "The database can't be deleted when this value is set to true."
+  default     = false
+}
 
 locals {
   name                    = var.name
@@ -107,6 +111,7 @@ locals {
   backup_retention_period = var.backup_retention_period
   publicly_accessible     = var.publicly_accessible
   apply_immediately       = var.apply_immediately
+  deletion_protection     = var.deletion_protection
   trusted_cidr_blocks     = var.trusted_cidr_blocks
   db_subnets              = var.db_subnets
   vpc_id                  = data.aws_subnet.default.vpc_id

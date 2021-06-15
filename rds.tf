@@ -18,6 +18,7 @@ resource "aws_db_instance" "default" {
   publicly_accessible             = local.publicly_accessible
   storage_encrypted               = true
   apply_immediately               = local.apply_immediately
+  deletion_protection             = local.deletion_protection
   enabled_cloudwatch_logs_exports = local.logs_set
   tags                            = local.tags
 }
@@ -43,6 +44,7 @@ resource "aws_db_instance" "parameterized" {
   publicly_accessible             = local.publicly_accessible
   storage_encrypted               = true
   apply_immediately               = local.apply_immediately
+  deletion_protection             = local.deletion_protection
   enabled_cloudwatch_logs_exports = local.logs_set
   tags                            = local.tags
 }

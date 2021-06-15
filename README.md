@@ -35,6 +35,7 @@ You may specify `parameter_prefix` and the module will store output values to th
 * `enable_error_log` - Enable error log (Default is `true`)
 * `enable_general_log` - Enable general log (Default `true`)
 * `enable_slowquery_log` - Enable slowquery log (Default `true`)
+* `deletion_protection` - The database can't be deleted (Default `true`)
 
 ## Usage
 
