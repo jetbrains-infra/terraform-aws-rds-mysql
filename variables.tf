@@ -49,6 +49,10 @@ variable "enable_slowquery_log" {
   description = "Enable slowquery log."
   default     = true
 }
+variable "enhanced_monitoring_interval" {
+  description = "Enable Enhanced Monitoring by specifying its interval. Allowed values are 0, 1, 5, 10, 15, 30, 60."
+  default     = 0
+}
 variable "backup_window" {
   description = "The daily time range (in UTC) during which automated backups are created if they are enabled."
   default     = "05:00-07:00"
@@ -124,6 +128,7 @@ locals {
     var.enable_general_log ? "general" : "",
     var.enable_slowquery_log ? "slowquery" : "",
   ])
+  enhanced_monitoring_interval = var.enhanced_monitoring_interval
   tags = merge({
     Name          = var.name,
     Module        = "RDS MySQL"

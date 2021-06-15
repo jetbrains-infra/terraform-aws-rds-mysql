@@ -20,6 +20,7 @@ resource "aws_db_instance" "default" {
   apply_immediately               = local.apply_immediately
   deletion_protection             = local.deletion_protection
   enabled_cloudwatch_logs_exports = local.logs_set
+  monitoring_interval             = local.enhanced_monitoring_interval
   tags                            = local.tags
 }
 
@@ -46,5 +47,6 @@ resource "aws_db_instance" "parameterized" {
   apply_immediately               = local.apply_immediately
   deletion_protection             = local.deletion_protection
   enabled_cloudwatch_logs_exports = local.logs_set
+  monitoring_interval             = local.enhanced_monitoring_interval
   tags                            = local.tags
 }
