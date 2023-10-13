@@ -14,7 +14,7 @@ resource "aws_db_instance" "default" {
   multi_az                            = local.multi_az
   backup_window                       = local.backup_window
   backup_retention_period             = local.backup_retention_period
-  name                                = local.database
+  db_name                             = local.database
   username                            = local.username
   password                            = local.password
   publicly_accessible                 = local.publicly_accessible
@@ -43,7 +43,7 @@ resource "aws_db_instance" "parameterized" {
   multi_az                            = local.multi_az
   backup_window                       = local.backup_window
   backup_retention_period             = local.backup_retention_period
-  name                                = local.database
+  db_name                             = local.database
   username                            = local.username
   password                            = local.password
   publicly_accessible                 = local.publicly_accessible
