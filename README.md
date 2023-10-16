@@ -37,6 +37,7 @@ You may specify `parameter_prefix` and the module will store output values to th
 * `enable_slowquery_log` - Enable slowquery log (Default `true`)
 * `deletion_protection` - The database can't be deleted (Default `true`)
 * `enhanced_monitoring_interval` - Enable Enhanced Monitoring by specifying its interval. Allowed values are 0, 1, 5, 10, 15, 30, 60 (Default `0`)
+* `performance_insights_enabled` - Enable Performance Insights (Default `false`)
 
 ## Usage
 

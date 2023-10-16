@@ -22,6 +22,7 @@ resource "aws_db_instance" "default" {
   deletion_protection                 = local.deletion_protection
   enabled_cloudwatch_logs_exports     = local.logs_set
   monitoring_interval                 = local.enhanced_monitoring_interval
+  performance_insights_enabled        = local.performance_insights_enabled
   iam_database_authentication_enabled = true
   tags                                = local.tags
 }
@@ -51,6 +52,7 @@ resource "aws_db_instance" "parameterized" {
   deletion_protection                 = local.deletion_protection
   enabled_cloudwatch_logs_exports     = local.logs_set
   monitoring_interval                 = local.enhanced_monitoring_interval
+  performance_insights_enabled        = local.performance_insights_enabled
   iam_database_authentication_enabled = true
   tags                                = local.tags
 }
