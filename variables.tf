@@ -101,10 +101,14 @@ variable "storage_type" {
   description = "One of 'standard', 'gp2', 'gp3' (new generation of general purpose SSD), or 'io1'."
   default     = "gp2"
 }
+variable "identifier" {
+  description = "The name of the RDS instance"
+  default     = ""
+}
 
 locals {
   name                    = var.name
-  id                      = lower(replace(var.name, " ", "-"))
+  id                      = length(var.identifier) > 0 ? var.identifier : lower(replace(var.name, " ", "-"))
   subnet_group_name       = lower(replace(var.name, " ", "-"))
   username                = var.username == "" ? random_pet.username.id : var.username
   password                = var.password == "" ? random_password.password.result : var.password
