@@ -42,7 +42,7 @@ resource "aws_db_instance" "parameterized" {
   skip_final_snapshot                 = true
   allocated_storage                   = local.disk_size
   max_allocated_storage               = 1000
-  storage_type                        = "gp2"
+  storage_type                        = local.storage_type
   storage_encrypted                   = true
   multi_az                            = local.multi_az
   backup_window                       = local.backup_window
