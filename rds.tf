@@ -23,7 +23,7 @@ resource "aws_db_instance" "default" {
   enabled_cloudwatch_logs_exports     = local.logs_set
   monitoring_interval                 = local.enhanced_monitoring_interval
   performance_insights_enabled        = local.performance_insights_enabled
-  iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = local.iam_database_authentication_enabled
   tags                                = local.tags
 }
 
@@ -53,6 +53,6 @@ resource "aws_db_instance" "parameterized" {
   enabled_cloudwatch_logs_exports     = local.logs_set
   monitoring_interval                 = local.enhanced_monitoring_interval
   performance_insights_enabled        = local.performance_insights_enabled
-  iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = local.iam_database_authentication_enabled
   tags                                = local.tags
 }
