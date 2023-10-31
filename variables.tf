@@ -97,6 +97,10 @@ variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   default     = false
 }
+variable "storage_type" {
+  description = "One of 'standard', 'gp2', 'gp3' (new generation of general purpose SSD), or 'io1'."
+  default     = "gp2"
+}
 
 locals {
   name                    = var.name
@@ -126,6 +130,9 @@ locals {
   address                 = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.address) : join("", aws_db_instance.parameterized.*.address)
   hosted_zone_id          = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.hosted_zone_id) : join("", aws_db_instance.parameterized.*.hosted_zone_id)
   rds_id                  = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)
+
+  storage_type = var.storage_type
+
   logs_set = compact([
     var.enable_audit_log ? "audit" : "",
     var.enable_error_log ? "error" : "",
