@@ -25,6 +25,9 @@ resource "aws_db_instance" "default" {
   performance_insights_enabled        = local.performance_insights_enabled
   iam_database_authentication_enabled = local.iam_database_authentication_enabled
   tags                                = local.tags
+  lifecycle {
+    ignore_changes = [password]
+  }
 }
 
 resource "aws_db_instance" "parameterized" {
@@ -55,4 +58,7 @@ resource "aws_db_instance" "parameterized" {
   performance_insights_enabled        = local.performance_insights_enabled
   iam_database_authentication_enabled = local.iam_database_authentication_enabled
   tags                                = local.tags
+  lifecycle {
+    ignore_changes = [password]
+  }
 }
