@@ -9,7 +9,7 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot                 = true
   allocated_storage                   = local.disk_size
   max_allocated_storage               = 1000
-  storage_type                        = "gp2"
+  storage_type                        = local.storage_type
   storage_encrypted                   = true
   multi_az                            = local.multi_az
   backup_window                       = local.backup_window
@@ -23,8 +23,11 @@ resource "aws_db_instance" "default" {
   enabled_cloudwatch_logs_exports     = local.logs_set
   monitoring_interval                 = local.enhanced_monitoring_interval
   performance_insights_enabled        = local.performance_insights_enabled
-  iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = local.iam_database_authentication_enabled
   tags                                = local.tags
+  lifecycle {
+    ignore_changes = [password]
+  }
 }
 
 resource "aws_db_instance" "parameterized" {
@@ -39,7 +42,7 @@ resource "aws_db_instance" "parameterized" {
   skip_final_snapshot                 = true
   allocated_storage                   = local.disk_size
   max_allocated_storage               = 1000
-  storage_type                        = "gp2"
+  storage_type                        = local.storage_type
   storage_encrypted                   = true
   multi_az                            = local.multi_az
   backup_window                       = local.backup_window
@@ -53,6 +56,9 @@ resource "aws_db_instance" "parameterized" {
   enabled_cloudwatch_logs_exports     = local.logs_set
   monitoring_interval                 = local.enhanced_monitoring_interval
   performance_insights_enabled        = local.performance_insights_enabled
-  iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = local.iam_database_authentication_enabled
   tags                                = local.tags
+  lifecycle {
+    ignore_changes = [password]
+  }
 }

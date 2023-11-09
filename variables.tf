@@ -97,36 +97,50 @@ variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   default     = false
 }
+variable "storage_type" {
+  description = "One of 'standard', 'gp2', 'gp3' (new generation of general purpose SSD), or 'io1'."
+  default     = "gp3"
+}
+variable "identifier" {
+  description = "The name of the RDS instance"
+  default     = ""
+}
+variable "iam_database_authentication_enabled" {
+  description = "Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled"
+  default     = true
+}
 
 locals {
-  name                    = var.name
-  id                      = lower(replace(var.name, " ", "-"))
-  subnet_group_name       = lower(replace(var.name, " ", "-"))
-  username                = var.username == "" ? random_pet.username.id : var.username
-  password                = var.password == "" ? random_password.password.result : var.password
-  database                = var.database == "" ? random_pet.db_name.id : var.database
-  parameter_group_name    = var.parameter_group_name
-  rds_with_param_group    = local.parameter_group_name == "" ? 0 : 1
-  rds_without_param_group = local.parameter_group_name == "" ? 1 : 0
-  parameter_prefix        = var.parameter_prefix == "" ? "" : "${var.parameter_prefix}/${local.id}"
-  store_parameters        = var.parameter_prefix == "" ? 0 : 1
-  instance_type           = var.instance_type
-  engine_version          = var.engine_version
-  family                  = "mysql${var.engine_version}"
-  disk_size               = var.disk_size
-  multi_az                = var.multi_az
-  backup_window           = var.backup_window
-  backup_retention_period = var.backup_retention_period
-  publicly_accessible     = var.publicly_accessible
-  apply_immediately       = var.apply_immediately
-  deletion_protection     = var.deletion_protection
-  trusted_cidr_blocks     = var.trusted_cidr_blocks
-  db_subnets              = var.db_subnets
-  vpc_id                  = data.aws_subnet.default.vpc_id
-  address                 = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.address) : join("", aws_db_instance.parameterized.*.address)
-  hosted_zone_id          = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.hosted_zone_id) : join("", aws_db_instance.parameterized.*.hosted_zone_id)
-  rds_id                  = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)
-  logs_set = compact([
+  name                                = var.name
+  id                                  = length(var.identifier) > 0 ? var.identifier : lower(replace(var.name, " ", "-"))
+  subnet_group_name                   = lower(replace(var.name, " ", "-"))
+  username                            = var.username == "" ? random_pet.username.id : var.username
+  password                            = var.password == "" ? random_password.password.result : var.password
+  database                            = var.database == "" ? random_pet.db_name.id : var.database
+  parameter_group_name                = var.parameter_group_name
+  rds_with_param_group                = local.parameter_group_name == "" ? 0 : 1
+  rds_without_param_group             = local.parameter_group_name == "" ? 1 : 0
+  parameter_prefix                    = var.parameter_prefix == "" ? "" : "${var.parameter_prefix}/${local.id}"
+  store_parameters                    = var.parameter_prefix == "" ? 0 : 1
+  instance_type                       = var.instance_type
+  engine_version                      = var.engine_version
+  family                              = "mysql${var.engine_version}"
+  disk_size                           = var.disk_size
+  multi_az                            = var.multi_az
+  backup_window                       = var.backup_window
+  backup_retention_period             = var.backup_retention_period
+  publicly_accessible                 = var.publicly_accessible
+  apply_immediately                   = var.apply_immediately
+  deletion_protection                 = var.deletion_protection
+  trusted_cidr_blocks                 = var.trusted_cidr_blocks
+  db_subnets                          = var.db_subnets
+  vpc_id                              = data.aws_subnet.default.vpc_id
+  address                             = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.address) : join("", aws_db_instance.parameterized.*.address)
+  hosted_zone_id                      = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.hosted_zone_id) : join("", aws_db_instance.parameterized.*.hosted_zone_id)
+  rds_id                              = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)
+  storage_type                        = var.storage_type
+  iam_database_authentication_enabled = var.iam_database_authentication_enabled
+  logs_set                            = compact([
     var.enable_audit_log ? "audit" : "",
     var.enable_error_log ? "error" : "",
     var.enable_general_log ? "general" : "",
@@ -134,10 +148,10 @@ locals {
   ])
   enhanced_monitoring_interval = var.enhanced_monitoring_interval
   performance_insights_enabled = var.performance_insights_enabled
-  tags = merge({
+  tags                         = merge({
     Name          = var.name,
     Module        = "RDS MySQL"
-    ModuleVersion = "v0.4.0"
+    ModuleVersion = "v0.5.0"
     ModuleSource  = "https://github.com/jetbrains-infra/terraform-aws-rds-mysql"
   }, var.tags)
 }
