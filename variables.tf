@@ -99,7 +99,7 @@ variable "deletion_protection" {
 }
 variable "storage_type" {
   description = "One of 'standard', 'gp2', 'gp3' (new generation of general purpose SSD), or 'io1'."
-  default     = "gp2"
+  default     = "gp3"
 }
 variable "identifier" {
   description = "The name of the RDS instance"
@@ -151,7 +151,7 @@ locals {
   tags                         = merge({
     Name          = var.name,
     Module        = "RDS MySQL"
-    ModuleVersion = "v0.4.0"
+    ModuleVersion = "v0.5.0"
     ModuleSource  = "https://github.com/jetbrains-infra/terraform-aws-rds-mysql"
   }, var.tags)
 }
