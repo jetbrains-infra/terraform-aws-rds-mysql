@@ -35,6 +35,11 @@ output "rds_id" {
   value       = local.resource_id
 }
 
+output "rds_resource_id" {
+  description = "RDS Resource ID"
+  value       = local.resource_id
+}
+
 output "rds_arn" {
   description = "The RDS ARN"
   value       = local.arn
