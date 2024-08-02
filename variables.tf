@@ -153,7 +153,7 @@ locals {
   tags = merge({
     Name          = var.name,
     Module        = "RDS MySQL"
-    ModuleVersion = "v0.5.0"
+    ModuleVersion = "v0.5.1"
     ModuleSource  = "https://github.com/jetbrains-infra/terraform-aws-rds-mysql"
   }, var.tags)
 }
