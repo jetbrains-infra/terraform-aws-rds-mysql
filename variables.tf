@@ -137,10 +137,12 @@ locals {
   vpc_id                              = data.aws_subnet.default.vpc_id
   address                             = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.address) : join("", aws_db_instance.parameterized.*.address)
   hosted_zone_id                      = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.hosted_zone_id) : join("", aws_db_instance.parameterized.*.hosted_zone_id)
-  rds_id                              = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)
+  resource_id                         = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.id) : join("", aws_db_instance.parameterized.*.id)
+  identifier                          = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.identifier) : join("", aws_db_instance.parameterized.*.identifier)
+  arn                                 = local.parameter_group_name == "" ? join("", aws_db_instance.default.*.arn) : join("", aws_db_instance.parameterized.*.arn)
   storage_type                        = var.storage_type
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
-  logs_set                            = compact([
+  logs_set = compact([
     var.enable_audit_log ? "audit" : "",
     var.enable_error_log ? "error" : "",
     var.enable_general_log ? "general" : "",
@@ -148,10 +150,10 @@ locals {
   ])
   enhanced_monitoring_interval = var.enhanced_monitoring_interval
   performance_insights_enabled = var.performance_insights_enabled
-  tags                         = merge({
+  tags = merge({
     Name          = var.name,
     Module        = "RDS MySQL"
-    ModuleVersion = "v0.5.0"
+    ModuleVersion = "v0.5.1"
     ModuleSource  = "https://github.com/jetbrains-infra/terraform-aws-rds-mysql"
   }, var.tags)
 }
